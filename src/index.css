@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #6366f1; /* Indigo 500 */
+  --color-primary-hover: #4f46e5; /* Indigo 600 */
+  --color-secondary: #ec4899; /* Pink 500 */
+  --color-secondary-hover: #db2777; /* Pink 600 */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+}
+
+:root {
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 font-sans antialiased;
+  background: radial-gradient(circle at top left, #e0e7ff, #f3e8ff, #fff1f2);
+  min-height: 100vh;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  @apply backdrop-blur-lg bg-white/30 border border-white/20 shadow-xl;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/70 border border-white/50 shadow-lg rounded-2xl;
+}
+
+.glass-input {
+  @apply bg-white/50 border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all duration-200 backdrop-blur-sm;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+}
