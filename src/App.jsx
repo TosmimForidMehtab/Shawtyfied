@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -21,18 +21,17 @@ function App() {
           <div className="fixed -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-purple-200/30 blur-[100px] animate-float" />
           <div className="fixed -bottom-[30%] -right-[10%] w-[70%] h-[70%] rounded-full bg-indigo-200/30 blur-[100px] animate-pulse-slow" />
 
-          <Navbar />
-          <main className="container mx-auto px-4 py-8 relative z-10 flex-grow">
-            <Routes>
+          <Routes>
+            <Route element={<Layout />}>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
               <Route path="/my-urls" element={<PrivateRoute><MyUrls /></PrivateRoute>} />
               <Route path="/shorten" element={<PrivateRoute><ShortenUrl /></PrivateRoute>} />
               <Route path="/analytics" element={<PrivateRoute><Analytics /></PrivateRoute>} />
-              <Route path="/:url" element={<Redirect />} />
-            </Routes>
-          </main>
+            </Route>
+            <Route path="/:url" element={<Redirect />} />
+          </Routes>
           <Toaster
             position="top-right"
             toastOptions={{
@@ -49,6 +48,17 @@ function App() {
         </div>
       </Router>
     </AuthProvider>
+  );
+}
+
+function Layout() {
+  return (
+    <>
+      <Navbar />
+      <main className="container mx-auto px-4 py-8 relative z-10 flex-grow">
+        <Outlet />
+      </main>
+    </>
   );
 }
 
