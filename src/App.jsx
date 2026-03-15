@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
@@ -11,6 +11,7 @@ import Analytics from './pages/Analytics';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 import Redirect from './pages/Redirect';
+import ChatWidget from './components/ChatWidget';
 
 function App() {
   return (
@@ -52,12 +53,15 @@ function App() {
 }
 
 function Layout() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <>
       <Navbar />
       <main className="container mx-auto px-4 py-8 relative z-10 flex-grow">
         <Outlet />
       </main>
+      {isAuthenticated && <ChatWidget />}
     </>
   );
 }
