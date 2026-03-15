@@ -35,4 +35,6 @@ api.interceptors.response.use(
   }
 );
 
+export const chatWithAi = (message) => api.post('/ai/chat', { message });
+
 export default api;
